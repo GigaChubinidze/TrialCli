@@ -1,0 +1,26 @@
+from datetime import UTC, datetime, timedelta
+
+from jose import JWTError, jwt
+
+from app.core.config import settings
+
+
+def authenticate_user(username: str, password: str) -> bool:
+    return username == settings.demo_username and password == settings.demo_password
+
+
+def create_access_token(subject: str) -> str:
+    expire = datetime.now(UTC) + timedelta(minutes=settings.access_token_expire_minutes)
+    payload = {"sub": subject, "exp": expire}
+    return jwt.encode(payload, settings.secret_key, algorithm=settings.jwt_algorithm)
+
+
+def decode_access_token(token: str) -> str | None:
+    try:
+        payload = jwt.decode(token, settings.secret_key, algorithms=[settings.jwt_algorithm])
+    except JWTError:
+        return None
+    subject = payload.get("sub")
+    if not isinstance(subject, str):
+        return None
+    return subject

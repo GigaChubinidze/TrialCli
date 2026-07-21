@@ -23,6 +23,8 @@ services:
       DATABASE_URL: ${DATABASE_URL:-postgresql://tria:tria@db:5432/tria}
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://localhost:3000}
+      SECRET_KEY: ${SECRET_KEY:-giga-test}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES:-60}
     depends_on:
       db:
         condition: service_healthy

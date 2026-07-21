@@ -6,10 +6,15 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
+from app.dependencies.auth import get_current_user
 from app.models.participant import Participant
 from app.schemas.participant import ParticipantCreate, ParticipantRead, ParticipantUpdate
 
-router = APIRouter(prefix="/participants", tags=["participants"])
+router = APIRouter(
+    prefix="/participants",
+    tags=["participants"],
+    dependencies=[Depends(get_current_user)],
+)
 
 
 @router.post("", response_model=ParticipantRead, status_code=status.HTTP_201_CREATED)
