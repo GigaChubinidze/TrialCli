@@ -12,6 +12,7 @@ from app.core.config import settings
 from app.core.logging import setup_logging
 from app.db.session import check_db_connection, get_db, init_db
 from app.middleware.request_logging import RequestLoggingMiddleware
+from app.routers.participants import router as participants_router
 
 setup_logging(settings.log_level)
 error_logger = logging.getLogger("triacli.error")
@@ -34,6 +35,8 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
     app.add_middleware(RequestLoggingMiddleware)
+
+    app.include_router(participants_router)
 
     @app.exception_handler(StarletteHTTPException)
     async def http_exception_handler(_request: Request, exc: StarletteHTTPException):

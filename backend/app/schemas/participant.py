@@ -15,6 +15,15 @@ class ParticipantCreate(BaseModel):
     gender: Gender
 
 
+class ParticipantUpdate(BaseModel):
+    subject_id: str | None = Field(default=None, min_length=1, max_length=50)
+    study_group: StudyGroup | None = None
+    enrollment_date: date | None = None
+    status: ParticipantStatus | None = None
+    age: int | None = Field(default=None, ge=0, le=150)
+    gender: Gender | None = None
+
+
 class ParticipantRead(BaseModel):
     participant_id: UUID
     subject_id: str
