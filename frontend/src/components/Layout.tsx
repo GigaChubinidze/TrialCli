@@ -1,26 +1,19 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Layout() {
+  const { logout } = useAuth();
+
   return (
     <div>
-      <header
-        style={{
-          background: "#fff",
-          borderBottom: "1px solid #e2e8f0",
-          padding: "1rem",
-        }}
-      >
-        <nav
-          style={{
-            maxWidth: "960px",
-            margin: "0 auto",
-            display: "flex",
-            gap: "1rem",
-          }}
-        >
+      <header className="header">
+        <nav className="nav">
           <strong>TriaCli</strong>
           <NavLink to="/participants">Participants</NavLink>
           <NavLink to="/metrics">Metrics</NavLink>
+          <button type="button" className="link-button" onClick={logout}>
+            Log out
+          </button>
         </nav>
       </header>
       <main>
