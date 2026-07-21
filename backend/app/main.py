@@ -13,6 +13,7 @@ from app.core.logging import setup_logging
 from app.db.session import check_db_connection, get_db, init_db
 from app.middleware.request_logging import RequestLoggingMiddleware
 from app.routers.auth import router as auth_router
+from app.routers.metrics import router as metrics_router
 from app.routers.participants import router as participants_router
 
 setup_logging(settings.log_level)
@@ -39,6 +40,7 @@ def create_app() -> FastAPI:
 
     app.include_router(auth_router)
     app.include_router(participants_router)
+    app.include_router(metrics_router)
 
     @app.exception_handler(StarletteHTTPException)
     async def http_exception_handler(_request: Request, exc: StarletteHTTPException):
