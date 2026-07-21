@@ -11,6 +11,7 @@ docker compose up --build
 
 | Service    | URL                   |
 | ---------- | --------------------- |
+| Web        | http://localhost:5173 |
 | API        | http://localhost:8000 |
 | PostgreSQL | localhost:5432        |
 
