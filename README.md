@@ -53,7 +53,8 @@ npm run build
 Or with Make:
 
 ```bash
-make test
+make test-backend
+make test-frontend
 ```
 
 ## Database access
